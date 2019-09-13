@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <None Remove="app\.gitignore" />
-    <None Remove="app\src\app\Base\base.service.ts" />
+    <None Remove="app\src\app\base\base.service.ts" />
     <None Remove="app\src\app\common\pipes\sanitize-html.pipe.ts" />
     <None Remove="app\src\app\flash-card\flash-card-item.component.ts" />
     <None Remove="app\src\app\flash-card\flash-card-list-item.component.ts" />
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="app\src\app\Base\base.service.ts" />
+    <TypeScriptCompile Include="app\src\app\base\base.service.ts" />
     <TypeScriptCompile Include="app\src\app\common\pipes\sanitize-html.pipe.ts" />
     <TypeScriptCompile Include="app\src\app\flash-card\flash-card-item.component.ts">
       <SubType>Code</SubType>

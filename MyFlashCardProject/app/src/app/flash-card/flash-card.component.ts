@@ -3,6 +3,7 @@ import { FlashCardervice } from './flash-card.service';
 import { FlashCard, Category } from './flash-card.model';
 import { GroupResult, groupBy } from '@progress/kendo-data-query';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -18,6 +19,7 @@ export class FlashCardComponent implements OnInit
   SelectedCategoryKeys: any[];
   newCategory: any;
   newCategoryParent: any;
+    OpenAddCategoryWindow: boolean;
 
   ngOnInit(): void
   {
@@ -81,7 +83,7 @@ if(true)
   public newFlashCardQuestion: string;
 
 
-  constructor(private svc: FlashCardervice, private toastr: ToastrService)
+  constructor(private svc: FlashCardervice, private toastr: ToastrService, private spinner: NgxSpinnerService)
   {
 
   }
@@ -141,12 +143,17 @@ if(true)
   }
   addNewCategory()
   {
+    this.spinner.show();
     var request = { CategoryName: this.newCategory, ParentCategoryId: this.newCategoryParent };
     this.svc.AddNewCategory(request).subscribe(r =>
     {
+      this.spinner.hide();
       if (r.IsSuccess())
       {
         this.toastr.success("Flash card added successfully");
+        this.GetCategories();
+        this.OpenAddCategoryWindow = false;
+        
       }
     })
   }
