@@ -1,0 +1,172 @@
+<style>
+  .k-scrollview-wrap {
+    margin: 0 auto;
+    background-color: transparent;
+    margin-bottom: 10px;
+  }
+
+  .demo-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 15px;
+    color: black;
+    text-align: center;
+    font-size: 24px;
+  }
+</style>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div>
+        <h4 style="margin-bottom: 25px;font-weight:bold; font-size:large">Flash Card</h4>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="row" style="height:700px; margin: 30px 0px 20px 0px; ">
+
+    <div class="col-sm-2" style="height:700px; background-color: #f5f5f5; box-shadow: 0 0 8px 0px white; border-bottom: 1px solid #ececec;margin-right:0px;">
+      <div style="margin-bottom: 15px;font-weight:bold; font-size:large; padding-top:10px">Categories</div>
+
+      <button style="right:0" (click)="OpenAddCategoryWindow =true;"><span class="fa fa-plus"></span></button><br />
+      <kendo-treeview [nodes]="Categories"
+                      textField="categoryName"
+                      kendoTreeViewExpandable
+                      kendoTreeViewSelectable
+                      kendoTreeViewFlatDataBinding
+                      idField="categoryId"
+                      parentIdField="parentCategoryId" *ngIf="Categories"
+                      [selectBy]="'categoryName'"
+                      [(selectedKeys)]="SelectedCategoryKeys"
+                      (selectionChange)="handleCategorySelection($event)">
+      </kendo-treeview>
+
+
+
+    </div>
+    <div class="col-sm-10" style="padding-left:1px; margin-left:0px;left:1px;">
+
+      <div class="row" style="height:70px;background-color: #f5f5f5;margin:0px;">
+        <div class="col-sm-4" style="margin-top:25px;">
+
+          <input class="form-control"
+                 name="searchText"
+                 style="width:100%; margin-bottom: 4px;"
+                 placeholder="Search by text for a selected category..."
+                 maxlength="300" [(ngModel)]="SearchText" />
+
+        </div>
+        <div class="col-sm-2" style="margin-top:10px;">
+          <button class="btn btn-default" style="margin-top: 15px !important;" (click)="LoadFlashCards(true)"><span class="fa fa-search">&nbsp;  </span> Search</button>
+        </div>
+        <div class="col-sm-2" style="margin-top:10px;">
+          <button class="btn btn-default" style="margin-top: 15px !important;" (click)="windowOpened=true"><span class="fa fa-plus">&nbsp;  </span> Add New</button>
+        </div>
+
+      </div>
+      <div class="row" style="margin:0" *ngIf="isSearched">
+
+        <div *ngFor="let card of FlashCards">
+          <flash-card-list-item [FlashCard]="card"></flash-card-list-item>
+        </div>
+      </div>
+      <div class="row" style="margin:0" *ngIf="!isSearched">
+        <div class="col-sm-12" style="height:630px; background-color: #f5f5f5;margin:0">
+          <div style="padding-top:10px; margin-bottom:0px;" *ngIf="FlashCards">
+            <flash-card-item [FlashCards]="FlashCards"></flash-card-item>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <kendo-window [minWidth]="400" [minHeight]="225" [width]="800" [height]="650" style="align-content:center;" title="New Flash Card" *ngIf="OpenAddCategoryWindow" (close)="OpenAddCategoryWindow=false">
+
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Category: </label><br />
+        <input class="form-control"
+               name="searchText"
+               style="width:100%; margin-bottom: 4px;"
+               type="text" [(ngModel)]="newCategory" /><br />
+        <label>Parent Category: </label><br />
+        <kendo-dropdownlist [data]="Categories"
+                            [defaultItem]="{categoryName:null, categoryId:null}"
+                            [textField]="'categoryName'"
+                            [valueField]="'categoryId'"
+                            [valuePrimitive]="true"
+                            [(ngModel)]="newCategoryParent">
+        </kendo-dropdownlist>
+
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-primary" (click)="addNewCategory()">Save</button>
+      </div>
+    </div>
+
+
+
+
+  </kendo-window>
+
+  <kendo-window [minWidth]="400" [minHeight]="225" [width]="800" [height]="650" style="align-content:center;" title="New Flash Card" *ngIf="windowOpened" (close)="windowOpened=false">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <label>Category: </label><br />
+        <kendo-dropdownlist [data]="Categories"
+                            [textField]="'categoryName'"
+                            [valueField]="'categoryId'"
+                            [valuePrimitive]="true"
+                            [(ngModel)]="newFlashCardCategory">
+        </kendo-dropdownlist>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label>Question: </label><br />
+        <textarea placeholder="Enter question..." rows="4" cols="4" style="width:750px; height:50px" [(ngModel)]="newFlashCardQuestion"></textarea>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-offset-4">
+        <button class="btn btn-default" style="margin-right:5px;" (click)="isGeneral=true;isCode=false"><span class="fa fa-align-justify">&nbsp;</span> General </button>
+        <button class="btn btn-default" (click)="isGeneral=false;isCode=true"><span class="fa fa-code">&nbsp;</span> Code </button>
+      </div>
+    </div>FlashCard
+    <div class="row" style="margin-top:5px;">
+
+      <div class="col-sm-12" *ngIf="isGeneral">
+
+        <kendo-editor [(ngModel)]="flashCardContent" name="content" style="height: 330px;" *ngIf="isGeneral"></kendo-editor>
+      </div>
+      <div class="col-sm-12" *ngIf="isCode">
+        <textarea style="width:750px;height:330px; " placeholder="Enter code..." [(ngModel)]="flashCardContent"></textarea>
+      </div>
+
+    </div>
+    <div class="row" style="margin-top:5px;">
+
+      <div class="col-sm-offset-9">
+        <button class="btn btn-default" style="margin-right:5px;"><span class="fa fa-close">&nbsp;</span> Cancel </button>
+        <button class="btn btn-default" (click)="addNewFlashCard()"><span class="fa fa-Save">&nbsp;</span> Save </button>
+
+      </div>
+
+    </div>
+
+
+
+  </kendo-window>
+</div>
+
+
+

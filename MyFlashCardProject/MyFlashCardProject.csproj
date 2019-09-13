@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="app\.gitignore" />
+    <None Remove="app\src\app\Base\base.service.ts" />
+    <None Remove="app\src\app\common\pipes\sanitize-html.pipe.ts" />
+    <None Remove="app\src\app\flash-card\flash-card-item.component.ts" />
+    <None Remove="app\src\app\flash-card\flash-card-list-item.component.ts" />
+    <None Remove="app\src\app\flash-card\flash-card.component.ts" />
+    <None Remove="app\src\app\flash-card\flash-card.model.ts" />
+    <None Remove="app\src\app\flash-card\flash-card.service.ts" />
+    <None Remove="app\src\app\test.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlashCard.DataModel\FlashCard.DataModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="app\src\app\Base\base.service.ts" />
+    <TypeScriptCompile Include="app\src\app\common\pipes\sanitize-html.pipe.ts" />
+    <TypeScriptCompile Include="app\src\app\flash-card\flash-card-item.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="app\src\app\flash-card\flash-card-list-item.component.ts" />
+    <TypeScriptCompile Include="app\src\app\flash-card\flash-card.component.ts" />
+    <TypeScriptCompile Include="app\src\app\flash-card\flash-card.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="app\src\app\flash-card\flash-card.model.ts" />
+    <TypeScriptCompile Include="app\src\app\test.service.ts" />
+    <TypeScriptCompile Include="app\src\app\viewModels\serverResponse.ts" />
+  </ItemGroup>
+
+</Project>

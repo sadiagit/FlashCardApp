@@ -1,0 +1,23 @@
+
+<div class="container-fluid">
+  <div class="row" *ngIf="FlashCard">
+    <div class="col-sm-12">
+
+      <a (click)="openFlashCard=true">
+        <h4 style="margin-bottom: 5px;font-weight:bold; font-size:large">{{FlashCard.question}}</h4>
+      </a>
+      <span>{{FlashCard.trimmedAnswer}}</span>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+<kendo-window [minWidth]="400" [minHeight]="225" [width]="800" [height]="600" style="align-content:center;" [top]="0" [left]="0" title="Flash Card" *ngIf="openFlashCard" (close)="openFlashCard=false">
+  <flash-card-item [FlashCard]="FlashCard"></flash-card-item>
+</kendo-window>
+
+
+

@@ -1,0 +1,26 @@
+
+<ng-template let-item="item" #template>
+  <div class="row">
+    <div class="col-sm-12" style="margin: 15px;font-weight:bold; font-size:large;"> {{item.question}}</div>
+    <div class="col-sm-12" style="margin: 15px;" *ngIf="item.type == 'General'" [innerHTML]="item.answer | sanitizeHtml">
+      <!--https://blog.fullstacktraining.com/binding-html-with-angular/-->
+    </div>
+    <div class="col-sm-8" style="margin: 15px;" *ngIf="item.type == 'Code'"><pre><code>{{item.answer}}</code></pre> </div>
+  </div>
+</ng-template>
+<kendo-scrollview [data]="FlashCards"
+                  [width]="width"
+                  [height]="height"
+                  [arrows]="true"
+                  [pageable]="true" *ngIf="FlashCards">
+  <ng-template let-item="item">
+    <ng-template *ngTemplateOutlet="template; context: {item: item}"></ng-template>
+  </ng-template>
+</kendo-scrollview>
+
+<ng-container *ngIf="FlashCard"
+              [ngTemplateOutlet]="template"
+              [ngTemplateOutletContext]="{item: FlashCard}"></ng-container>
+
+
+
