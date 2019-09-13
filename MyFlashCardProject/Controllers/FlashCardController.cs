@@ -24,29 +24,16 @@ namespace MyFlashCardProject.Controllers
         public ActionResult GetFlashCards(FlashCardSearchVM vm)
         {
             var sr = new ServerResponse<List<FlashCardVM>>();
-
-            sr.PayLoad = new List<FlashCardVM>() { new FlashCardVM() {Question= "What is docker?", Answer="this is a <p><strong>test</strong></p>", Type="General"},
-                new FlashCardVM() {Question= "Code", Answer="if(true)"+"\r\n{"+"\r\n  print('apple');"+"\r\n}",  Type="Code"}
-            };
+            sr.PayLoad = _flashCardContext.FlashCards.Where(fc => vm.SelectedCategory.CategoryId == fc.Category.CategoryId && (string.IsNullOrEmpty(vm.SearchText) || fc.Question.Contains(vm.SearchText) || fc.Answer.Contains(vm.SearchText)))
+                .Select(fc => new FlashCardVM() { Question = fc.Question, Answer = fc.Answer, Category = fc.Category.CategoryId, Type = fc.FlashCardType.TypeId }).ToList();
+                     
             return new OkObjectResult(sr);
         }
         [HttpGet("categories")]
         public ActionResult GetCategories()
         {
             var sr = new ServerResponse<List<CategoryVM>>();
-            sr.PayLoad = _flashCardContext.Categories.ToList().Select(c => new CategoryVM() { CategoryId = c.CategoryId, CategoryName = c.CategoryName, ParentCategoryId = c.ParentCategory?.CategoryId }).ToList();
-
-            //    new List<CategoryVM>()
-            //{
-            //    new CategoryVM(){ CategoryId=1,CategoryName="Networking"},
-            //    new CategoryVM(){ CategoryId=2,CategoryName="Cisco", ParentCategoryId=1},
-            //    new CategoryVM(){ CategoryId=3,CategoryName="Programming"},
-            //    new CategoryVM(){ CategoryId=4,CategoryName="Algorithm", ParentCategoryId=3},
-            //    new CategoryVM(){ CategoryId=5,CategoryName="BFS", ParentCategoryId=4},
-            //    new CategoryVM(){ CategoryId=6,CategoryName="DFS", ParentCategoryId=4},
-            //    new CategoryVM(){ CategoryId=7,CategoryName="DataStructure", ParentCategoryId=3}
-
-            //};
+            sr.PayLoad = _flashCardContext.Categories.ToList().Select(c => new CategoryVM() { CategoryId = c.CategoryId, CategoryName = c.CategoryName, ParentCategoryId = c.ParentCategory?.CategoryId }).ToList();                
 
             return new OkObjectResult(sr);
         }
@@ -55,6 +42,11 @@ namespace MyFlashCardProject.Controllers
         public ActionResult AddNewFlashCard(FlashCardVM vm)
         {
             var sr = new ServerResponse<string>();
+            _flashCardContext.FlashCards.Add(new FlashCard.DataModel.Models.FlashCard()
+            { Answer = vm.Answer, Question = vm.Question, Category = _flashCardContext.Categories.Single(c => c.CategoryId == vm.Category), FlashCardType = _flashCardContext.FlashCardTypes.Single(t => t.TypeId == vm.Type) });
+
+            _flashCardContext.SaveChanges();
+
             sr.PayLoad = "good";
             return new OkObjectResult(sr);
 

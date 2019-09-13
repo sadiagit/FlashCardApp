@@ -119,7 +119,7 @@
 
   </kendo-window>
 
-  <kendo-window [minWidth]="400" [minHeight]="225" [width]="800" [height]="650" style="align-content:center; top:100px;" title="New Flash Card" *ngIf="windowOpened" (close)="windowOpened=false">
+  <kendo-window [minWidth]="400" [minHeight]="225" [width]="800" [height]="650" style="align-content:center; top:100px;" title="New Flash Card" *ngIf="windowOpened" (close)="CloseFlashCardWindow()">
 
     <div class="row">
       <div class="col-sm-12">
@@ -142,8 +142,8 @@
     </div>
     <div class="row">
       <div class="col-sm-offset-4">
-        <button class="btn btn-default" style="margin-right:5px;" (click)="isGeneral=true;isCode=false"><span class="fa fa-align-justify">&nbsp;</span> General </button>
-        <button class="btn btn-default" (click)="isGeneral=false;isCode=true"><span class="fa fa-code">&nbsp;</span> Code </button>
+        <button class="btn btn-default" style="margin-right:5px;" (click)="isGeneral=true;isCode=false;flashCardContent=null"><span class="fa fa-align-justify">&nbsp;</span> General </button>
+        <button class="btn btn-default" (click)="isGeneral=false;isCode=true;flashCardContent=null"><span class="fa fa-code">&nbsp;</span> Code </button>
       </div>
     </div>
     <div class="row" style="margin-top:5px;">
@@ -160,7 +160,7 @@
     <div class="row" style="margin-top:5px;">
 
       <div class="col-sm-offset-9">
-        <button class="btn btn-default" style="margin-right:5px;"><span class="fa fa-close">&nbsp;</span> Cancel </button>
+        <button class="btn btn-default" style="margin-right:5px;" (click)="CloseFlashCardWindow()"><span class="fa fa-close">&nbsp;</span> Cancel </button>
         <button class="btn btn-default" (click)="addNewFlashCard()"><span class="fa fa-Save">&nbsp;</span> Save </button>
 
       </div>

@@ -20,6 +20,7 @@ export class FlashCardComponent implements OnInit
   newCategory: any;
   newCategoryParent: any;
     OpenAddCategoryWindow: boolean;
+    windowOpened: boolean;
 
   ngOnInit(): void
   {
@@ -29,48 +30,6 @@ export class FlashCardComponent implements OnInit
   public Categories: Array<Category> = [];
   Filter: any = { Category: '' };
   FlashCards: Array<FlashCard> = [];
-  public data: any[] = [
-    {
-      text: 'Networking', items: [
-        { text: 'Tables & Chairs' },
-        { text: 'Sofas' },
-        { text: 'Occasional Furniture' }
-      ]
-    },
-    {
-      text: 'Programming', items: [
-        { text: 'Bed Linen' },
-        { text: 'Curtains & Blinds' },
-        { text: 'Carpets' }
-      ]
-    }
-  ];
-
-  public treeNodes: any[] = [
-    {
-      categoryId: 1,
-      categoryName: 'Root Node 1'
-    }, {
-      categoryId: 2,
-      categoryName: 'Root Node 2'
-    }, {
-      categoryId: 3,
-      parentCategoryId: 2,
-      categoryName: 'Child node of Root Node 2'
-    }
-  ];
-  public items: any[] = [
-    { question: 'What is docker?', answer: "It's a container.", type: 'general' },
-    {
-      question: 'Code', answer: `
-if(true)
-{
-  print('apple');
-}
-`, type: 'code'
-    },
-    { question: 'Sky', answer: 'Not answered' }
-  ];
   public width = '100%';
   public height = '610px';
   public SearchText: string;
@@ -90,7 +49,7 @@ if(true)
   LoadFlashCards(isSearched: boolean)
   {
     this.isSearched = isSearched;
-    var request = { selectedCategory: this.SelectedCategoryDataItem, searchText: this.SearchText }
+    var request = { selectedCategory: this.SelectedCategoryDataItem, searchText: isSearched? this.SearchText :""}
     this.svc.LoadFlashCards(request).subscribe(r =>
     {
       if (r.IsSuccess())
@@ -131,15 +90,27 @@ if(true)
   }
   addNewFlashCard()
   {
+    this.spinner.show();
     var request = { question: this.newFlashCardQuestion, answer: this.flashCardContent, type: this.isCode ? "Code" : "General", category: this.newFlashCardCategory };
     this.svc.AddNewFlashCard(request).subscribe(r =>
     {
+      this.spinner.hide();
       if (r.IsSuccess())
       {
         this.toastr.success("Flash card added successfully");
+        this.LoadFlashCards(false);
+        
+        this.ResetFlashCardWindow();
       }
     })
 
+  }
+  ResetFlashCardWindow()
+  {
+    this.windowOpened = false;
+    this.newFlashCardQuestion = null;
+    this.newFlashCardCategory = null;
+    this.flashCardContent = null;
   }
   addNewCategory()
   {
@@ -150,11 +121,15 @@ if(true)
       this.spinner.hide();
       if (r.IsSuccess())
       {
-        this.toastr.success("Flash card added successfully");
+        this.toastr.success("Category added successfully");
         this.GetCategories();
         this.OpenAddCategoryWindow = false;
         
       }
     })
+  }
+  CloseFlashCardWindow()
+  {
+    this.ResetFlashCardWindow();
   }
 }
