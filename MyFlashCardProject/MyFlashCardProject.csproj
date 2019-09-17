@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FlashCard.BusinessLogic\FlashCard.BusinessLogic.csproj" />
     <ProjectReference Include="..\FlashCard.DataModel\FlashCard.DataModel.csproj" />
   </ItemGroup>
 

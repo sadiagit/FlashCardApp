@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FlashCard.BusinessLogic;
+using FlashCard.BusinessLogic.Interfaces;
 using FlashCard.DataModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +38,7 @@ namespace MyGeneralProjects
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<FlashCardContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+            services.AddTransient<IFlashCardManager, FlashCardManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

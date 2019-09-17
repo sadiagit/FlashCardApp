@@ -2,38 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FlashCard.BusinessLogic;
+using FlashCard.BusinessLogic.Interfaces;
 using FlashCard.DataModel;
 using FlashCard.DataModel.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyFlashCardProject.DataModels.ViewModels;
 using MyFlashCardProject.Models;
 
 namespace MyFlashCardProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FlashCardController : ControllerBase
+    public class FlashCardController : BaseController
     {
-        private readonly FlashCardContext _flashCardContext;
-        public FlashCardController(FlashCardContext context)
+        private readonly IFlashCardManager _manager;
+        public FlashCardController(IFlashCardManager manager)
         {
-            _flashCardContext = context;
+            _manager = manager;
         }
         // GET api/<controller>/5
         [HttpPost("get")]
         public ActionResult GetFlashCards(FlashCardSearchVM vm)
         {
             var sr = new ServerResponse<List<FlashCardVM>>();
-            sr.PayLoad = _flashCardContext.FlashCards.Where(fc => vm.SelectedCategory.CategoryId == fc.Category.CategoryId && (string.IsNullOrEmpty(vm.SearchText) || fc.Question.Contains(vm.SearchText) || fc.Answer.Contains(vm.SearchText)))
-                .Select(fc => new FlashCardVM() { Question = fc.Question, Answer = fc.Answer, Category = fc.Category.CategoryId, Type = fc.FlashCardType.TypeId }).ToList();
-                     
+            ExecuteAction(() =>
+            {
+                sr.PayLoad = _manager.GetFlashCards(vm).Select(fc => new FlashCardVM() { Question = fc.Question, Answer = fc.Answer, Category = fc.Category.CategoryId, Type = fc.FlashCardType.TypeId }).ToList();
+            }, sr);
+
             return new OkObjectResult(sr);
         }
         [HttpGet("categories")]
         public ActionResult GetCategories()
         {
             var sr = new ServerResponse<List<CategoryVM>>();
-            sr.PayLoad = _flashCardContext.Categories.ToList().Select(c => new CategoryVM() { CategoryId = c.CategoryId, CategoryName = c.CategoryName, ParentCategoryId = c.ParentCategory?.CategoryId }).ToList();                
+            ExecuteAction(() =>
+            {
+                sr.PayLoad = _manager.GetCategories().Select(c => new CategoryVM() { CategoryId = c.CategoryId, CategoryName = c.CategoryName, ParentCategoryId = c.ParentCategory?.CategoryId }).ToList();
+            }, sr);
 
             return new OkObjectResult(sr);
         }
@@ -42,12 +50,12 @@ namespace MyFlashCardProject.Controllers
         public ActionResult AddNewFlashCard(FlashCardVM vm)
         {
             var sr = new ServerResponse<string>();
-            _flashCardContext.FlashCards.Add(new FlashCard.DataModel.Models.FlashCard()
-            { Answer = vm.Answer, Question = vm.Question, Category = _flashCardContext.Categories.Single(c => c.CategoryId == vm.Category), FlashCardType = _flashCardContext.FlashCardTypes.Single(t => t.TypeId == vm.Type) });
-
-            _flashCardContext.SaveChanges();
-
-            sr.PayLoad = "good";
+            ExecuteAction(() =>
+            {
+                _manager.AddNewFlashCard(vm);
+                sr.PayLoad = "good";
+            }, sr);
+           
             return new OkObjectResult(sr);
 
         }
@@ -55,9 +63,13 @@ namespace MyFlashCardProject.Controllers
         public ActionResult AddCategory(CategoryVM vm)
         {
             var sr = new ServerResponse<string>();
-            _flashCardContext.Categories.Add(new Category { CategoryName = vm.CategoryName, ParentCategory = vm.ParentCategoryId == null ? null : _flashCardContext.Categories.FirstOrDefault(c => c.CategoryId == vm.ParentCategoryId) });
-            _flashCardContext.SaveChanges();
-            sr.PayLoad = "good";
+
+            ExecuteAction(() =>
+            {
+                _manager.AddCategory(vm);
+                sr.PayLoad = "good";
+            }, sr);
+
             return new OkObjectResult(sr);
 
         }

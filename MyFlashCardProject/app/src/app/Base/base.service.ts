@@ -36,7 +36,9 @@ export abstract class BaseHttpClient
         sr.IsSuccess = function ()
         {
           if (!this.success)
-            return toastr.error(this.message);
+          {
+            toastr.error(this.message);
+          }
 
           return this.success;
         };
