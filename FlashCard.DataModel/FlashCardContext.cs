@@ -8,14 +8,26 @@ namespace FlashCard.DataModel
     {
         public FlashCardContext(DbContextOptions options) : base(options)
         {
-          //  this.Database.EnsureCreated();
+            //  this.Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Models.FlashCard>().ToTable("FlashCard");
             modelBuilder.Entity<FlashCardType>().ToTable("FlashCardType");
             modelBuilder.Entity<Category>().ToTable("Category");
-
+            modelBuilder.Entity<FlashCardType>()
+                .HasData(
+           new FlashCardType
+           {
+               TypeId = "General",
+               Description = "For general purpose"
+           },
+           new FlashCardType
+           {
+               TypeId = "Code",
+               Description = "For coding purpose"
+           }
+       );
         }
 
         protected FlashCardContext()
@@ -23,7 +35,7 @@ namespace FlashCard.DataModel
         }
         public DbSet<Models.FlashCard> FlashCards { get; set; }
         public DbSet<FlashCardType> FlashCardTypes { get; set; }
-        public DbSet<Category> Categories { get; set; }      
+        public DbSet<Category> Categories { get; set; }
 
     }
 }

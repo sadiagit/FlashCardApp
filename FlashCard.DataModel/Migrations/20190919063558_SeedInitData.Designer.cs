@@ -4,14 +4,16 @@ using FlashCard.DataModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FlashCard.DataModel.Migrations
 {
     [DbContext(typeof(FlashCardContext))]
-    partial class FlashCardContextModelSnapshot : ModelSnapshot
+    [Migration("20190919063558_SeedInitData")]
+    partial class SeedInitData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
