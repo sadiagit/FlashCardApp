@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MyGeneralProjects
+namespace MyFlashCardProject
 {
     public class Startup
     {

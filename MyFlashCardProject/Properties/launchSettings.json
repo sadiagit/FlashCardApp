@@ -1,10 +1,9 @@
-﻿{
+{
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:52916"
-     
     }
   },
   "profiles": {
@@ -16,13 +15,14 @@
       },
       "applicationUrl": "http://localhost:52917"
     },
-    "MyGeneralProjects": {
+    "MyFlashCardProject": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:5000"
     }
+    
   }
 }
