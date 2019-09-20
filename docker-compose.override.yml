@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  myflashcardproject:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "46320:80"

@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  myflashcardproject:
+    image: myflashcardproject
+    build:
+      context: .
+      dockerfile: MyFlashCardProject/Dockerfile
+    depends_on:  
+      - sqlserver
+
+  sqlserver:  
+    image: microsoft/mssql-server-linux:2017-latest  
+    hostname: 'sqlserver'  
+    environment:  
+      ACCEPT_EULA: Y  
+      SA_PASSWORD: "BigPassw0rd"  
+    volumes:
+      - ./data/mssql:/var/opt/mssql
+    ports:  
+      - '1439:1433'  
+    expose:  
+      - 1439
+      - 1433
+      
