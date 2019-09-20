@@ -57,5 +57,6 @@ This app implements basic architecture pattern i.e. DataLayer, BusinessLayer and
 - [EF Core in Docker](https://www.c-sharpcorner.com/article/entity-framework-core-in-docker-container-part-ii-sqlite/)
 - [Docker cheatsheet](cheetsheet github url)
 - [Serlog Asp.Net Core](https://github.com/serilog/serilog-aspnetcore)
-- [Serilog from app config][https://itnext.io/loggly-in-asp-net-core-using-serilog-dc0e2c7d52eb]
+- [Serilog from app config](https://itnext.io/loggly-in-asp-net-core-using-serilog-dc0e2c7d52eb)
+- [Serilog and Seq](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Serilog-and-Seq#Seq)
  
