@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +25,13 @@ namespace MyFlashCardProject
                 var services = scope.ServiceProvider;
                 try
                 {
+                    Log.Information("Applying DB Migrations... ");
                     var db = services.GetRequiredService<T>();
                     db.Database.Migrate();
                 }
                 catch (Exception ex)
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "Database Creation/Migrations failed!");
+                    Log.Error(ex, "Database Creation/Migrations failed!");
                 }
             }
             return webHost;

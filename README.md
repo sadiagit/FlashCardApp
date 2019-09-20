@@ -1,6 +1,6 @@
 # FlashCardApp
 
-As computer professionals, we need to read a lot but we can't remember all. This app can be used to create flash cards while reading a topic.
+As computer professionals, we need to read a lot but we can't remember them all. This app can be used to create flash cards while reading a topic. It's a basic app where each flash card will contain a question and answer (no card flipping is required).
 
 # Installation
 
@@ -34,12 +34,20 @@ To restart the alrady installed app run `docker-compose start` and to stop it `d
 # App Demo
 
 TODO: add some images 
+# Technlogies used
+
+- docker
+- Asp.net Core 2.1
+- EF Core 2.1
+- Angular 8+
+- Serilog
+- Seq
 
 # How Code Works
 
 Add core concepts of the app.
 
-#Considerations
+# Considerations
 
 This is a side project and pretty small. My intension was to learn docker, so I did not pay much attention on the project architecture (e.g. onion architecture which I will be working on next).
 This app implements basic architecture pattern i.e. DataLayer, BusinessLayer and UI layer.
@@ -48,4 +56,6 @@ This app implements basic architecture pattern i.e. DataLayer, BusinessLayer and
 
 - [EF Core in Docker](https://www.c-sharpcorner.com/article/entity-framework-core-in-docker-container-part-ii-sqlite/)
 - [Docker cheatsheet](cheetsheet github url)
+- [Serlog Asp.Net Core](https://github.com/serilog/serilog-aspnetcore)
+- [Serilog from app config][https://itnext.io/loggly-in-asp-net-core-using-serilog-dc0e2c7d52eb]
  
