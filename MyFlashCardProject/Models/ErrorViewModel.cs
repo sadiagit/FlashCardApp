@@ -1,6 +1,6 @@
 using System;
 
-namespace MyGeneralProjects.Models
+namespace MyFlashCardProject.Models
 {
     public class ErrorViewModel
     {

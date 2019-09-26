@@ -13,7 +13,9 @@ namespace FlashCard.DataModel.Models
         public int FlashCardId { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
-        
+        public DateTime CreatedOn { get; set; }
+        public DateTime LastModifiedOn { get; set; }
+
         public virtual FlashCardType FlashCardType { get; set; }
 
         [ForeignKey("CategoryId")]
