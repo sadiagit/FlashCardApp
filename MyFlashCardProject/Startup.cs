@@ -38,7 +38,13 @@ namespace MyFlashCardProject
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<FlashCardContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+            services.AddDbContext<FlashCardContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection"), sqlServerOptionsAction: sqlOptions =>
+            {
+                sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 10,
+                maxRetryDelay: TimeSpan.FromSeconds(60),
+                errorNumbersToAdd: null);
+            }));
             services.AddTransient<IFlashCardManager, FlashCardManager>();
         }
 
@@ -65,6 +71,9 @@ namespace MyFlashCardProject
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            app.SeedDataBase();
         }
+
+        
     }
 }
