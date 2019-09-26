@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyFlashCardProject.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace MyFlashCardProject.Controllers
     {
         protected void LogErrorAndSetResponse<T>(Exception e, ServerResponse<T> response)
         {
+            Log.Error(e, "Exception occurred at Server.");
             if (e.InnerException != null)
             {
                 if (e.InnerException.InnerException != null)
