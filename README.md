@@ -34,12 +34,12 @@ To restart the alrady installed app run `docker-compose start` and to stop it `d
 # App Demo
 
 TODO: add some images 
-# Technlogies used
+# Technologies used
 
 - docker
 - Asp.net Core 2.1
 - EF Core 2.1
-- Angular 8+
+- Angular 8, Kendo Angular, bootstrap 3.3.7
 - Serilog
 - Seq
 
