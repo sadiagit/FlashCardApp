@@ -5,24 +5,21 @@ using System.Text;
 
 namespace FlashCard.BusinessLogic.WebScrappers
 {
-    public class DNCScrapper
+    public class DNCScrapper : BaseScrapper
     {
-        public void Start()
+        public DNCScrapper(WebScrappingDataManager dataManager) : base(dataManager)
         {
-            var html = "https://www.dotnetcurry.com/tutorials/aspnet-core";
+        }
 
+        protected override string WebLink => "https://www.dotnetcurry.com/tutorials/aspnet-core";
 
-            HtmlWeb web = new HtmlWeb();
+        protected override void ParseHtmlDoc(HtmlDocument htmldoc)
+        {
 
-            var htmlDoc = web.Load(html);
-
-            var node = htmlDoc.DocumentNode.SelectNodes("//h2[@class='"+ "articlehead']");
-
-            //var links = node[2].SelectNodes("//ul/li/ul/li/div/div/a");
-            //foreach(var link in links)
+            var nodes = htmldoc.DocumentNode.SelectNodes("//h2[@class='" + "articlehead']");
+            //foreach(var node in nodes)
             //{
-            //    var l = link.Attributes["href"].Value;
-                
+            //            DataManager.CreateTopic()
             //}
 
         }

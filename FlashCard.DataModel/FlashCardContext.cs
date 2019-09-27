@@ -8,7 +8,7 @@ namespace FlashCard.DataModel
     {
         public FlashCardContext(DbContextOptions options) : base(options)
         {
-            //  this.Database.EnsureCreated();
+           // this.Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,14 +28,13 @@ namespace FlashCard.DataModel
                Description = "For coding purpose"
            }
        );
+            modelBuilder.Entity<Topic>().ToTable("Topic");
         }
 
-        protected FlashCardContext()
-        {
-        }
         public DbSet<Models.FlashCard> FlashCards { get; set; }
         public DbSet<FlashCardType> FlashCardTypes { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Topic> Topics { get; set; }
 
     }
 }

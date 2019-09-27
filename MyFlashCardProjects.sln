@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFlashCardProject", "MyFlashCardProject\MyFlashCardProject.csproj", "{0B9B92B4-0035-4659-8E21-8FED8DD8F57D}"
 EndProject
@@ -10,10 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashCard.BusinessLogic", "FlashCard.BusinessLogic\FlashCard.BusinessLogic.csproj", "{85F3E71E-346C-40FF-92FF-33196C2B30A3}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{984B779C-563B-431C-9413-FB17C808DD8F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashCard.BusinessLogic.Tests", "FlashCard.BusinessLogic.Tests\FlashCard.BusinessLogic.Tests.csproj", "{D7AF6DBF-F261-4446-BC33-1FF0B0904013}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{9702F475-E7D7-4BAC-AD9C-CB805E3528B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
