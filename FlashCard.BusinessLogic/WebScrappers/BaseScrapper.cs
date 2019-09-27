@@ -1,29 +1,47 @@
 ﻿using HtmlAgilityPack;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FlashCard.BusinessLogic.WebScrappers
 {
     public abstract class BaseScrapper
     {
-        protected BaseScrapper(WebScrappingDataManager dataManager)
+        protected BaseScrapper(IWebScrappingDataManager dataManager)
         {
             DataManager = dataManager;
         }
 
         protected abstract string WebLink { get; }
-        protected WebScrappingDataManager DataManager { get; set; }
-        public void Start()
+        protected IWebScrappingDataManager DataManager { get; set; }
+        public IServiceProvider Services { get; }
+        public async Task Start(CancellationToken stoppingToken)
         {
-            HtmlWeb web = new HtmlWeb();
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                HtmlWeb web = new HtmlWeb();
 
-            var htmlDoc = web.Load(WebLink);
+                var htmlDoc = web.Load(WebLink);
 
-            ParseHtmlDoc(htmlDoc);
+                ParseHtmlDoc(htmlDoc);
+
+                await Task.Delay(10000, stoppingToken);
+            }
 
         }
 
         protected abstract void ParseHtmlDoc(HtmlDocument htmldoc);
+
+
+        //while (!stoppingToken.IsCancellationRequested)
+        //{
+        //    Start();
+        //    await Task.Delay(500, stoppingToken);
+        //}
     }
 }
+

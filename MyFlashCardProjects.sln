@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlashCard.BusinessLogic", "
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{984B779C-563B-431C-9413-FB17C808DD8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashCard.BusinessLogic.Tests", "FlashCard.BusinessLogic.Tests\FlashCard.BusinessLogic.Tests.csproj", "{0210AD2C-1F75-4586-9734-61EF02EC0080}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{984B779C-563B-431C-9413-FB17C808DD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{984B779C-563B-431C-9413-FB17C808DD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{984B779C-563B-431C-9413-FB17C808DD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0210AD2C-1F75-4586-9734-61EF02EC0080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0210AD2C-1F75-4586-9734-61EF02EC0080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0210AD2C-1F75-4586-9734-61EF02EC0080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0210AD2C-1F75-4586-9734-61EF02EC0080}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
