@@ -67,10 +67,12 @@ namespace MyFlashCardProject
                             {
                                 Log.Information("retrying DB Migrations... ");
                                 context.Database.Migrate();
+                                retry = 10;
+                                return;
                             }
-                            catch (Exception)
+                            catch (Exception retryEx)
                             {
-                                Log.Warning(ex, "Database Creation/Migrations failed!");
+                                Log.Warning(retryEx, "Database Creation/Migrations failed!");
                                 retry++;
                             }
                         }
