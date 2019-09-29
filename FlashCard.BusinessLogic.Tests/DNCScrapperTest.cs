@@ -21,7 +21,7 @@ namespace FlashCard.BusinessLogic.Tests
             dtaContext.Database.EnsureCreated();
 
             DNCScrapper scrapper = new DNCScrapper(new WebScrappingDataManager(dtaContext));
-            scrapper.StartAsync(new System.Threading.CancellationToken());
+         //   scrapper.StartAsync(new System.Threading.CancellationToken());
         }
     }
 }
