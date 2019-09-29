@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FlashCard.BusinessLogic;
 using FlashCard.BusinessLogic.Interfaces;
+using FlashCard.BusinessLogic.WebScrappers;
 using FlashCard.DataModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace MyFlashCardProject
 {
@@ -46,6 +49,9 @@ namespace MyFlashCardProject
                 errorNumbersToAdd: null);
             }));
             services.AddTransient<IFlashCardManager, FlashCardManager>();
+            services.AddTransient<IWebScrappingDataManager, WebScrappingDataManager>();
+            services.AddScoped<IDNCScrapper, DNCScrapper>();
+            services.AddHostedService<DNCScrapperHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
