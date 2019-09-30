@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyFlashCardProject.BackgroundServices;
+using MyFlashCardProject.Schedulers;
 using Serilog;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
@@ -52,7 +53,7 @@ namespace MyFlashCardProject
             services.AddTransient<IFlashCardManager, FlashCardManager>();
             services.AddTransient<IWebScrappingDataManager, WebScrappingDataManager>();
             services.AddScoped<IDNCScrapper, DNCScrapper>();
-            services.AddHostedService<DNCScrapperHostedService>();
+            services.AddSingleton<IHostedService,DNCScrapperScheduledTask>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

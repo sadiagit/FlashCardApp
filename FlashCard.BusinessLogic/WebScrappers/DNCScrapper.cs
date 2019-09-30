@@ -8,13 +8,10 @@ namespace FlashCard.BusinessLogic.WebScrappers
         {
         }
 
-        protected override string WebLink => "https://www.dotnetcurry.com/tutorials/aspnet-core";
-
-       
+        protected override string WebLink => "https://www.dotnetcurry.com/tutorials/aspnet-core";       
 
         protected override void ParseHtmlDoc(HtmlDocument htmldoc)
         {
-
             var nodes = htmldoc.DocumentNode.SelectNodes("//h2[@class='" + "articlehead']");
             foreach (var node in nodes)
             {
@@ -22,6 +19,7 @@ namespace FlashCard.BusinessLogic.WebScrappers
                 var linkHref = link.GetAttributeValue("href", null);
                 var tittle = link.InnerText;
                 DataManager.CreateTopic(new ViewModels.TopicVM() { Link = linkHref, Title = tittle });
+               // throw new System.Exception("Testing Sche task error");
                 
             }
             DataManager.SaveChanges();

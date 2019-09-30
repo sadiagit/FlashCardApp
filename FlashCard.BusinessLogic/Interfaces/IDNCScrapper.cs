@@ -5,6 +5,6 @@ namespace FlashCard.BusinessLogic.WebScrappers
 {
     public interface IDNCScrapper
     {
-        Task Start(CancellationToken stoppingToken);
+        Task Start();
     }
 }

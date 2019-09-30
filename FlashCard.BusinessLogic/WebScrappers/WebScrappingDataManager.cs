@@ -16,7 +16,7 @@ namespace FlashCard.BusinessLogic.WebScrappers
 
         public void CreateTopic(TopicVM vm)
         {
-            var isNewTopic = vm.TopicId == null;
+            var isNewTopic = vm.TopicId == null || DataContext.Topics.FirstOrDefault(t => t.TopicTitle == vm.Title) == null;
             Topic topic = null;
             if (isNewTopic)
             {

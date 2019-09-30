@@ -9,37 +9,22 @@ using System.Threading.Tasks;
 
 namespace MyFlashCardProject.BackgroundServices
 {
-    public class DNCScrapperHostedService : BackgroundService
+    public class DNCScrapperHostedService : ScopedProcessor
     {
-        public DNCScrapperHostedService(IServiceProvider services)
+        public DNCScrapperHostedService(IServiceProvider services) : base(services)
         {
-            Services = services;
         }
 
-        public IServiceProvider Services { get; private set; }
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ProcessAsync(IServiceScope scope)
         {
+            var scopedProcessingService = scope.ServiceProvider.GetRequiredService<IDNCScrapper>();
 
-            await DoWork(stoppingToken);
+            await scopedProcessingService.Start();
         }
 
-        private async Task DoWork(CancellationToken stoppingToken)
-        {
 
-            using (var scope = Services.CreateScope())
-            {
-                var scopedProcessingService =
-                    scope.ServiceProvider
-                        .GetRequiredService<IDNCScrapper>();
 
-                await scopedProcessingService.Start(stoppingToken);
-            }
-        }
 
-        public override async Task StopAsync(CancellationToken stoppingToken)
-        {
-            await Task.CompletedTask;
-        }
+
     }
 }

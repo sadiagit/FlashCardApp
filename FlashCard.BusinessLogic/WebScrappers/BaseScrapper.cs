@@ -13,33 +13,21 @@ namespace FlashCard.BusinessLogic.WebScrappers
         {
             DataManager = dataManager;
         }
-
         protected abstract string WebLink { get; }
         protected IWebScrappingDataManager DataManager { get; set; }
-        public IServiceProvider Services { get; }
-        public async Task Start(CancellationToken stoppingToken)
+        public Task Start()
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                HtmlWeb web = new HtmlWeb();
+            HtmlWeb web = new HtmlWeb();
 
-                var htmlDoc = web.Load(WebLink);
+            var htmlDoc = web.Load(WebLink);
 
-                ParseHtmlDoc(htmlDoc);
+            ParseHtmlDoc(htmlDoc);
 
-                await Task.Delay(10000, stoppingToken);
-            }
-
+            return Task.CompletedTask;
         }
 
         protected abstract void ParseHtmlDoc(HtmlDocument htmldoc);
 
-
-        //while (!stoppingToken.IsCancellationRequested)
-        //{
-        //    Start();
-        //    await Task.Delay(500, stoppingToken);
-        //}
     }
 }
 
