@@ -1,6 +1,7 @@
 ﻿using FlashCard.BusinessLogic.ViewModels;
 using FlashCard.DataModel.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FlashCard.BusinessLogic.WebScrappers
 {
@@ -8,6 +9,7 @@ namespace FlashCard.BusinessLogic.WebScrappers
     {
         List<Topic> GetTopics();
         void CreateTopic(TopicVM topicVM);
-        void SaveChanges();
+        int SaveChanges();
+        Task<int> GetUnreadTopicsCount();
     }
 }

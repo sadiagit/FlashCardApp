@@ -15,18 +15,18 @@ namespace FlashCard.BusinessLogic.WebScrappers
         }
         protected abstract string WebLink { get; }
         protected IWebScrappingDataManager DataManager { get; set; }
-        public Task Start()
+        public Task<int> Start()
         {
             HtmlWeb web = new HtmlWeb();
 
             var htmlDoc = web.Load(WebLink);
 
-            ParseHtmlDoc(htmlDoc);
+            var result = ParseHtmlDoc(htmlDoc);
 
-            return Task.CompletedTask;
+            return Task.FromResult(result);
         }
 
-        protected abstract void ParseHtmlDoc(HtmlDocument htmldoc);
+        protected abstract int ParseHtmlDoc(HtmlDocument htmldoc);
 
     }
 }

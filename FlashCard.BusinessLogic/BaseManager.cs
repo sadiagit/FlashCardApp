@@ -12,9 +12,9 @@ namespace FlashCard.BusinessLogic
         {
             DataContext = dataContext;
         }
-        public void SaveChanges()
+        public int SaveChanges()
         {
-            DataContext.SaveChanges();
+            return DataContext.SaveChanges();
         }
     }
 }

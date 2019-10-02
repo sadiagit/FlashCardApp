@@ -1,2 +1,75 @@
+<style>
+  .notification {
+    /*background-color: #555;*/
+    color: white;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+  }
 
+    .notification:hover {
+      background: red;
+    }
+
+    .notification .badge1 {
+      position: absolute;
+      top: 5px;
+      right: 11px;
+      padding: 0px 5px;
+      border-radius: 50%;
+      background-color: red;
+      color: white;
+    }
+    .notification .badge2 {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      padding: 1px 3px;
+      border-radius: 50%;
+      background-color: red;
+      color: white;
+    }
+    .notification .badge3 {
+      position: absolute;
+      top: 6px;
+      right: 7px;
+      padding: 4px 0px;
+      border-radius: 50%;
+      background-color: red;
+      color: white;
+    }
+</style>
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#/flash-card">Flash Card APP</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/#/flash-card">Home <span class="sr-only">(current)</span></a></li>
+        <li>
+          <a href="/#/topics" class="notification" data-toggle="tooltip" data-placement="top" title="There are some new topics added you might be interested to read!">
+            <span>Topics</span>
+            <span [ngClass]="{'badge1': UnreadTopicsCount>0&&UnreadTopicsCount<10, 'badge2': UnreadTopicsCount>=10&&UnreadTopicsCount<100}"  *ngIf="UnreadTopicsCount>0 && UnreadTopicsCount<100">{{UnreadTopicsCount}}</span>
+            <span class="badge3" *ngIf="UnreadTopicsCount>=100">99+</span>
+          </a>
+        </li>
+
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 <router-outlet></router-outlet>

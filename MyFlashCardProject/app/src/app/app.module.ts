@@ -17,6 +17,8 @@ import { FlashCardListItemComponent } from './flash-card/flash-card-list-item.co
 import { CommonModule } from '@angular/common';
 import { FlashCardItemComponent } from './flash-card/flash-card-item.component';
 import { SanitizeHtmlPipe } from './common/pipes/sanitize-html.pipe';
+import * as signalR from '@aspnet/signalr';
+import { TopicsComponent } from './topics/topics.component';
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import { SanitizeHtmlPipe } from './common/pipes/sanitize-html.pipe';
     FlashCardComponent,
     FlashCardListItemComponent,
     FlashCardItemComponent,
+    TopicsComponent,
     SanitizeHtmlPipe //TODO: move to common module
   ],
   imports: [

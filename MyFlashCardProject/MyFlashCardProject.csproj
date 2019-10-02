@@ -15,6 +15,8 @@
     <None Remove="app\src\app\flash-card\flash-card.model.ts" />
     <None Remove="app\src\app\flash-card\flash-card.service.ts" />
     <None Remove="app\src\app\test.service.ts" />
+    <None Remove="app\src\app\topics\topic.service.ts" />
+    <None Remove="app\src\app\topics\topics.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +48,10 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="app\src\app\flash-card\flash-card.model.ts" />
     <TypeScriptCompile Include="app\src\app\test.service.ts" />
+    <TypeScriptCompile Include="app\src\app\topics\topic.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="app\src\app\topics\topics.component.ts" />
     <TypeScriptCompile Include="app\src\app\viewModels\serverResponse.ts" />
   </ItemGroup>
 

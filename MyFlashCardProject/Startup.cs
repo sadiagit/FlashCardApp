@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FlashCard.BusinessLogic;
 using FlashCard.BusinessLogic.Interfaces;
 using FlashCard.BusinessLogic.WebScrappers;
@@ -9,15 +6,13 @@ using FlashCard.DataModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MyFlashCardProject.BackgroundServices;
 using MyFlashCardProject.Schedulers;
-using Serilog;
+using MyFlashCardProject.SignalR;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace MyFlashCardProject
@@ -54,6 +49,8 @@ namespace MyFlashCardProject
             services.AddTransient<IWebScrappingDataManager, WebScrappingDataManager>();
             services.AddScoped<IDNCScrapper, DNCScrapper>();
             services.AddSingleton<IHostedService,DNCScrapperScheduledTask>();
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,7 +69,12 @@ namespace MyFlashCardProject
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            
+
+            // Add SignalR by mapping to a Route to the MessageHub
+            app.UseSignalR(config => {
+                config.MapHub<NotificationHub>("/notify");
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

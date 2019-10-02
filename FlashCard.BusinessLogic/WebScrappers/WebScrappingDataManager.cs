@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using FlashCard.BusinessLogic.ViewModels;
 using FlashCard.DataModel;
 using FlashCard.DataModel.Models;
@@ -16,7 +17,7 @@ namespace FlashCard.BusinessLogic.WebScrappers
 
         public void CreateTopic(TopicVM vm)
         {
-            var isNewTopic = vm.TopicId == null || DataContext.Topics.FirstOrDefault(t => t.TopicTitle == vm.Title) == null;
+            var isNewTopic = vm.TopicId == null && DataContext.Topics.FirstOrDefault(t => t.TopicTitle == vm.Title) == null;
             Topic topic = null;
             if (isNewTopic)
             {
@@ -60,6 +61,11 @@ namespace FlashCard.BusinessLogic.WebScrappers
         public List<Topic> GetTopics()
         {
             return DataContext.Topics.Where(t => t.Interested.HasValue && t.Interested.Value).ToList();
+        }
+        public  Task<int> GetUnreadTopicsCount()
+        {
+            var count = DataContext.Topics.Where(t => t.TopicLastRead == null && !t.Interested.HasValue).Count();
+            return Task.FromResult(count);
         }
     }
 }

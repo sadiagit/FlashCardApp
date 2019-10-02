@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FlashCard.BusinessLogic.WebScrappers;
 using Microsoft.AspNetCore.Mvc;
+using MyFlashCardProject.Models;
 
 namespace MyFlashCardProject.Controllers
 {
@@ -23,6 +24,16 @@ namespace MyFlashCardProject.Controllers
         {
             _manager.GetTopics();
             return new OkObjectResult("st");
+        }
+        [HttpGet("unread-counts")]
+        public IActionResult GetUnreadTopicsCount()
+        {
+            var sr = new ServerResponse<int>();
+            ExecuteAction(async () =>
+            {
+                sr.PayLoad = await _manager.GetUnreadTopicsCount();
+            }, sr);
+            return new OkObjectResult(sr);
         }
     }
 }
