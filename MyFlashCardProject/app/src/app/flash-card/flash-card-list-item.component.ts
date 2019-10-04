@@ -10,6 +10,7 @@ import { FlashCard } from './flash-card.model';
 })
 export class FlashCardListItemComponent implements OnInit
 {
+  openFlashCard: boolean;
   ngOnInit(): void
   {
     this.FlashCard.trimmedAnswer = this.FlashCard.answer.substring(0, 20) + '...'

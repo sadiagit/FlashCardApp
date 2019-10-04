@@ -19,8 +19,8 @@ export class FlashCardComponent implements OnInit
   SelectedCategoryKeys: any[];
   newCategory: any;
   newCategoryParent: any;
-    OpenAddCategoryWindow: boolean;
-    windowOpened: boolean;
+  OpenAddCategoryWindow: boolean;
+  windowOpened: boolean;
 
   ngOnInit(): void
   {
@@ -49,7 +49,7 @@ export class FlashCardComponent implements OnInit
   LoadFlashCards(isSearched: boolean)
   {
     this.isSearched = isSearched;
-    var request = { selectedCategory: this.SelectedCategoryDataItem, searchText: isSearched? this.SearchText :""}
+    var request = { selectedCategory: this.SelectedCategoryDataItem, searchText: isSearched ? this.SearchText : "" }
     this.svc.LoadFlashCards(request).subscribe(r =>
     {
       if (r.IsSuccess())
@@ -75,17 +75,12 @@ export class FlashCardComponent implements OnInit
     });
   }
 
-  handleCategorySelection({ index, dataItem }: any, upsert: boolean)
+  handleCategorySelection({ index, dataItem }: any)
   {
-    if (upsert)
-    {
 
-    }
-    else
-    {
-      this.SelectedCategoryDataItem = dataItem;
-      this.LoadFlashCards(false);
-    }
+    this.SelectedCategoryDataItem = dataItem;
+    this.LoadFlashCards(false);
+
 
   }
   addNewFlashCard()
@@ -99,7 +94,7 @@ export class FlashCardComponent implements OnInit
       {
         this.toastr.success("Flash card added successfully");
         this.LoadFlashCards(false);
-        
+
         this.ResetFlashCardWindow();
       }
     })
@@ -124,7 +119,7 @@ export class FlashCardComponent implements OnInit
         this.toastr.success("Category added successfully");
         this.GetCategories();
         this.OpenAddCategoryWindow = false;
-        
+
       }
     })
   }
