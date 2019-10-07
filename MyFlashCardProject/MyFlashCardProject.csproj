@@ -55,8 +55,5 @@
     <TypeScriptCompile Include="app\src\app\viewModels\serverResponse.ts" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="rem cd $(SolutionDir)\MyFlashCardProject\app &#xD;&#xA;rem npm run prod" />
-  </Target>
 
 </Project>
