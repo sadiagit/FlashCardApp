@@ -1,10 +1,10 @@
 # FlashCardApp
 
-As computer professionals, we need to read a lot but we can't remember them all. This app can be used to create flash cards while reading a topic. It's a basic app where each flash card will contain a question and answer (no card flipping is required).
+As computer professionals, we need to read a lot but we can't remember them all. This app can be used to create flash cards while reading a topic. It's a basic app where each flash card will contain a question and answer (card flipping has not been implemented but I might extend it to add this feature).
 
 # Installation
 
-This app supports docker. It can be either run on docker and IISExpress/krestel webserver.
+This app supports docker. It can be either run on docker or IISExpress/krestel webserver.
 
 In order to run it in docker
 
@@ -49,7 +49,7 @@ Add core concepts of the app.
 
 # Considerations
 
-This is a side project and pretty small. My intension was to learn docker, so I did not pay much attention on the project architecture (e.g. onion architecture which I will be working on next).
+This is a side project and pretty small. My intention was to learn docker, so I did not pay much attention on the project architecture (e.g. onion architecture which I will be working on next).
 This app implements basic architecture pattern i.e. DataLayer, BusinessLayer and UI layer.
 
 # Further reading
