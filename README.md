@@ -13,7 +13,7 @@ In order to run it in docker
 
 # Run in Docker mode
 
-This app uses docker compose as it needs to start two containers, one for the the app and other for the sql server container.
+This app uses docker compose as it needs to start two containers, one for the app and other for the sql server container.
 
 You can either choose to open the code in Visual studio and set docker-compose project as start up project and run the app or you can
 
@@ -26,10 +26,10 @@ I have also uploaded a built image to docker hub which you can grab using below 
 docker pull sadiaboksh/myflashcard:latest
 ```
 
-and then run `docker-compose up`. You need the docker-compose_github_image.yaml from the repo and copy it to a different dierctory and open cmd in that dierctory.
+and then run `docker-compose up`. You need the docker-compose_github_image.yaml from the repo and copy it to a different directory and open cmd in that directory.
 
-Once the app is up and running in docker, you can shut it down by enter Ctrl+C in the cmd
-To restart the alrady installed app run `docker-compose start` and to stop it `docker-compose stop`  
+Once the app is up and running in docker, you can shut it down by enter Ctr+C in the cmd
+To restart the already installed app run `docker-compose start` and to stop it `docker-compose stop`  
 
 # App Demo
 
@@ -55,8 +55,11 @@ This app implements basic architecture pattern i.e. DataLayer, BusinessLayer and
 # Further reading
 
 - [EF Core in Docker](https://www.c-sharpcorner.com/article/entity-framework-core-in-docker-container-part-ii-sqlite/)
-- [Docker cheatsheet](cheetsheet github url)
-- [Serlog Asp.Net Core](https://github.com/serilog/serilog-aspnetcore)
+- [Docker cheatsheet](cheatsheet github url)
+- [Serilog Asp.Net Core](https://github.com/serilog/serilog-aspnetcore)
 - [Serilog from app config](https://itnext.io/loggly-in-asp-net-core-using-serilog-dc0e2c7d52eb)
 - [Serilog and Seq](https://github.com/dotnet-architecture/eShopOnContainers/wiki/Serilog-and-Seq#Seq)
  
+# Test
+
+Add instructions here for running tests, test coverage, or any other test-related information for the project.
