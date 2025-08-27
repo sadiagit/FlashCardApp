@@ -24,7 +24,7 @@
     "@progress/kendo-angular-common": "^1.0.0",
     "@progress/kendo-angular-dialog": "^4.0.0",
     "@progress/kendo-angular-dropdowns": "^4.0.0",
-    "@progress/kendo-angular-editor": "^0.7.0",
+    "@progress/kendo-angular-editor": "^1.2.3",
     "@progress/kendo-angular-l10n": "^2.0.0",
     "@progress/kendo-angular-popup": "^3.0.0",
     "@progress/kendo-angular-scrollview": "^3.0.0",
